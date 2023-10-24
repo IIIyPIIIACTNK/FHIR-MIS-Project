@@ -4,7 +4,11 @@
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <RootNamespace>FHIR_MIS_webview</RootNamespace>
+    <RootNamespace>FHIR_MIS_web</RootNamespace>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Hl7.Fhir.R4" Version="5.3.0" />
+  </ItemGroup>
 
 </Project>

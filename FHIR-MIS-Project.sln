@@ -5,7 +5,7 @@ VisualStudioVersion = 17.4.33122.133
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FHIR-MIS-Project", "FHIR-MIS-Project\FHIR-MIS-Project.csproj", "{4739C491-62DD-4212-BEED-36BE7D806E54}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FHIR-MIS-webview", "FHIR-MIS-webview\FHIR-MIS-webview.csproj", "{13747705-0471-450A-8870-CB88977054F6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FHIR-MIS-web", "FHIR-MIS-web\FHIR-MIS-web.csproj", "{FC49BAB4-F518-4E18-B9F9-803EC18B18C5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{4739C491-62DD-4212-BEED-36BE7D806E54}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4739C491-62DD-4212-BEED-36BE7D806E54}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4739C491-62DD-4212-BEED-36BE7D806E54}.Release|Any CPU.Build.0 = Release|Any CPU
-		{13747705-0471-450A-8870-CB88977054F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{13747705-0471-450A-8870-CB88977054F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{13747705-0471-450A-8870-CB88977054F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{13747705-0471-450A-8870-CB88977054F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC49BAB4-F518-4E18-B9F9-803EC18B18C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC49BAB4-F518-4E18-B9F9-803EC18B18C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC49BAB4-F518-4E18-B9F9-803EC18B18C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC49BAB4-F518-4E18-B9F9-803EC18B18C5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

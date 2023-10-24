@@ -1,0 +1,15 @@
+﻿body {
+}
+
+.table-row{
+    display: block;
+
+    outline: solid;
+    outline-color: black;
+    outline-width: 1px;
+
+    width: 800px;
+    height: 20px;
+    
+    
+}

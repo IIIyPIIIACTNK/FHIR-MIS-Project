@@ -1,0 +1,59 @@
+﻿@using Hl7.Fhir.Model;
+@using FHIR_MIS_web.ViewModels;
+
+@model IEnumerable<FireLyPatientViewModel>;
+
+
+<link rel="stylesheet" href="~/css/style.css"/>
+ 
+<div class="row">
+    <div class="col-md-8">
+        <table class="table table-bordered table-hover">
+            <tr>
+                <th>ФИО</th>
+                <th>Пол</th>
+                <th>Дата рождения</th>
+                <th>Адресс</th>
+            </tr>  
+            @foreach (var item in @Model)
+            {
+                 <tr>
+                <td>@item.FullName()</td>
+                <td>@item.Gender</td>
+                <td>@item.Birthday</td>
+                <td>@item.FullAddress()</td>
+                 </tr>
+            }
+        </table>
+    </div>
+    <div class="col-md-4">
+        <h4 class="card-title">Поиск</h4>
+        <div>
+            <p>Фамилия</p>
+            <input class="form-control"/>
+            <p>Имя</p>
+            <input class="form-control"/>
+            <p>Отчество</p>
+            <input class="form-control"/>
+            <div class="row">
+                <div class="col-md-2">
+                    <p>Пол</p>
+                    <select class="form-select-sm">
+                        <option selected></option>
+                        <option value="1">M</option>
+                        <option value="1">Ж</option>
+                    </select>
+                </div>
+                <div class="col-md-4 offset-4">
+                    <p>Дата рождения</p>
+                    <input type="date" class="form-control"/>
+                    
+                </div>
+            </div>
+            <div>
+                <p>Адрес</p>
+                <input class="form-control" />
+            </div>
+        </div>
+    </div>
+</div>
