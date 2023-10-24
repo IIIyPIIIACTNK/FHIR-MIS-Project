@@ -23,6 +23,21 @@ namespace FHIR_MIS_web.Controllers
             return View(patinetsToView);
         }
 
+        public IActionResult SearchResult(FireLyPatientViewModel patientViewModel)
+        {
+            IEnumerable<FireLyPatientViewModel> patinetsToView = GetPatient(new string[]
+            {
+                $"name={patientViewModel.FullName}",
+                $"birthday={patientViewModel.Birthday}"
+            });
+            return View(patientViewModel);
+        }
+
+        public IActionResult Search()
+        {
+            return View();
+        }
+
         private List<FireLyPatientViewModel> GetPatient(
             string[] criteria = null,
             int maxPatient = 20
