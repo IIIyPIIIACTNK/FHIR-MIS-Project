@@ -3,6 +3,7 @@ using Hl7.Fhir.Model;
 using Hl7.Fhir.Rest;
 using System.ComponentModel.DataAnnotations;
 using FHIR_MIS_web.ViewModels;
+using FHIR_MIS_web.Interfaces;
 
 namespace FHIR_MIS_web.Controllers
 {
@@ -22,13 +23,11 @@ namespace FHIR_MIS_web.Controllers
             return View(patinetsToView);
         }
 
-        public IActionResult SearchResult(FireLyPatientViewModel patientViewModel)
+        public IActionResult SearchResult(SearchViewModel searchViewModel)
         {
-            IEnumerable<FireLyPatientViewModel> patientsToView = GetPatient(new string[]
-            {
-                $"name={patientViewModel.FullName()}",
-                $"birthday={patientViewModel.Birthday}"
-            });
+            IEnumerable<FireLyPatientViewModel> patientsToView = GetPatient(
+                searchViewModel.FormSearchStrings()
+            );
             return View(patientsToView);
         }
 
