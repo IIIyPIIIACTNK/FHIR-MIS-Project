@@ -1,34 +1,35 @@
 ﻿@using FHIR_MIS_web.ViewModels
 @model FireLyPatientViewModel;
 
-<div class="col-md-4">
-        <h4 class="card-title">Поиск</h4>
-        <div>
-            <p>Фамилия</p>
-            <input asp-for=LastName class="form-control"/>
-            <p>Имя</p>
-            <input asp-for=FirstName class="form-control"/>
-            <p>Отчество</p>
-            <input asp-for=FathersName class="form-control"/>
-            <div class="row">
-                <div class="col-md-2">
-                    <p>Пол</p>
-                    <select asp-for=Gender class="form-select-sm">
-                        <option selected></option>
-                        <option value="1">M</option>
-                        <option value="1">Ж</option>
-                    </select>
-                </div>
-                <div class="col-md-4 offset-4">
-                    <p>Дата рождения</p>
-                    <input asp-for=Birthday type="date" class="form-control"/>
-
-                </div>
-            </div>
+<form asp-action="SearchResult" asp-controller="FireLy">
+    <div class="col-md-4">
+            <h4 class="card-title">Поиск</h4>
             <div>
-                <p>Адрес</p>
-                <input class="form-control" />
+                <label asp-for="LastName">Фамилия</label>
+                <input asp-for=LastName class="form-control"/>
+                <label asp-for="FirstName">Имя</label>
+                <input asp-for=FirstName class="form-control"/>
+                <label asp-for="FathersName">Отчество</label>
+                <input asp-for=FathersName class="form-control"/>
+                <div class="row">
+                    <div class="col-md-2">
+                        <label asp-for="Gender">Пол</label>
+                        <select asp-for=Gender class="form-select-sm">
+                            <option selected></option>
+                            <option value="1">M</option>
+                            <option value="1">Ж</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4 offset-4">
+                        <label asp-for="Birthday">Дата рождения</label>
+                        <input asp-for=Birthday type="date" class="form-control"/>
+                    </div>
+                </div>
+                <div>
+                    <p>Адрес</p>
+                    <input class="form-control"/>
+                </div>
             </div>
-        </div>
-        <a asp-action="SearchResult" class="btn btn-primary">Поиск</a>
-</div>
+            <a asp-action="SearchResult" class="btn btn-primary">Поиск</a>
+    </div>
+</form>

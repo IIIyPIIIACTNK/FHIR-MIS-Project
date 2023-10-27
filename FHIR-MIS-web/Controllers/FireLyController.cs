@@ -18,19 +18,18 @@ namespace FHIR_MIS_web.Controllers
         FhirClient fhirClient = new FhirClient(_fireLyUrl);
         public IActionResult Index()
         {
-            IEnumerable<FireLyPatientViewModel> patinetsToView = GetPatient(new string[] {"name=test"}, 10);
-            int i = 0;
+            IEnumerable<FireLyPatientViewModel> patinetsToView = GetPatient();
             return View(patinetsToView);
         }
 
         public IActionResult SearchResult(FireLyPatientViewModel patientViewModel)
         {
-            IEnumerable<FireLyPatientViewModel> patinetsToView = GetPatient(new string[]
+            IEnumerable<FireLyPatientViewModel> patientsToView = GetPatient(new string[]
             {
-                $"name={patientViewModel.FullName}",
+                $"name={patientViewModel.FullName()}",
                 $"birthday={patientViewModel.Birthday}"
             });
-            return View(patientViewModel);
+            return View(patientsToView);
         }
 
         public IActionResult Search()
@@ -43,7 +42,7 @@ namespace FHIR_MIS_web.Controllers
             int maxPatient = 20
             )
         {
-            List<Patient> patients = new List<Patient>();
+             List<Patient> patients = new List<Patient>();
             List<FireLyPatientViewModel> fireLyPatientViewModels= new List<FireLyPatientViewModel>();
 
             Bundle patientBundle;
@@ -63,20 +62,30 @@ namespace FHIR_MIS_web.Controllers
                 {
                     if (entry.Resource != null)
                     {
-                        Patient pat = (Patient)entry.Resource;
-                        patients.Add(pat);
-                        fireLyPatientViewModels.Add(new FireLyPatientViewModel()
+                        try
                         {
-                            FirstName = pat.Name.FirstOrDefault().Given.FirstOrDefault(),
-                            LastName = pat.Name.FirstOrDefault().Family,
-                            Gender = pat.Gender.ToString(),
-                            Birthday = pat.BirthDate,
-                            Address = pat.Address.FirstOrDefault()
-                        }) ;
+                            Patient pat = (Patient)entry.Resource;
+                            patients.Add(pat);
+                            fireLyPatientViewModels.Add(new FireLyPatientViewModel()
+                            {
+                                FirstName = pat.Name.FirstOrDefault().Given.FirstOrDefault(),
+                                LastName = pat.Name.FirstOrDefault().Family,
+                                Gender = pat.Gender.ToString(),
+                                Birthday = pat.BirthDate,
+                                Address = pat.Address.FirstOrDefault()
+                            });
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine(ex.Message);
+                            continue;
+                        }
+                        
                     }
                     if (patients.Count >= maxPatient) break;
                 }
                 if (patients.Count >= maxPatient) break;
+                fhirClient.Continue(patientBundle);
             }
 
             return fireLyPatientViewModels;
