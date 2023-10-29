@@ -1,3 +1,5 @@
+using Serilog;
+
 namespace FHIR_MIS_web
 {
     public class Program
@@ -8,6 +10,12 @@ namespace FHIR_MIS_web
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+            Log.Logger = new LoggerConfiguration()
+                .MinimumLevel.Debug()
+                .WriteTo.File("logs/json/log-.json", rollingInterval: RollingInterval.Day)
+                .WriteTo.File("logs/txt/log-.txt", rollingInterval: RollingInterval.Day)
+                .CreateLogger();
 
             var app = builder.Build();
 
@@ -28,7 +36,7 @@ namespace FHIR_MIS_web
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller=FireLy}/{action=Search}/{id?}");
 
             app.Run();
         }
