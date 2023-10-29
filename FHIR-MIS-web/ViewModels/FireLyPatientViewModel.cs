@@ -5,6 +5,7 @@ namespace FHIR_MIS_web.ViewModels
 {
     public class FireLyPatientViewModel
     {
+        public string Id { get; set; }
         public string FirstName { get; set; } = "";
         public string LastName { get; set; } = "";
         public string FathersName { get; set; } = "";
