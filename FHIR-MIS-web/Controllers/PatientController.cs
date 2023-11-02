@@ -23,7 +23,7 @@ namespace FHIR_MIS_web.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(CreatePatientViewModel viewModel) 
         {
-            return View();
+            return RedirectToAction("Index");
         }
     }
 }
