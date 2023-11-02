@@ -1,5 +1,6 @@
 using FHIR_MIS_web.Interfaces;
 using FHIR_MIS_web.Repositories;
+using FHIR_MIS_web.Data;
 using Serilog;
 
 namespace FHIR_MIS_web
@@ -13,6 +14,9 @@ namespace FHIR_MIS_web
             // Add services to the container.
             builder.Services.AddControllersWithViews();
             builder.Services.AddScoped<IServerPatientRepository, ServerPatientRepository>();
+            builder.Services.Configure<FhirServerSettings>(builder.Configuration
+                .GetSection("FhirServerSettings")
+                .GetSection("MyServer"));
 
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Debug()

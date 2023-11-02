@@ -1,4 +1,5 @@
 ﻿using FHIR_MIS_web.Data.Enums;
+using Hl7.Fhir.Model;
 
 namespace FHIR_MIS_web.ViewModels
 {
@@ -12,5 +13,6 @@ namespace FHIR_MIS_web.ViewModels
         public string City { get; set; }
         public string Street { get; set; }
         public string Telephone { get; set; }
+        public AdministrativeGender FhirGender { get; set; }
     }
 }
