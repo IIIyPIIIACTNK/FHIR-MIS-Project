@@ -2,6 +2,8 @@
 using FHIR_MIS_web.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Hl7.Fhir.Model;
+using System.Globalization;
+
 namespace FHIR_MIS_web.Controllers
 {
     public class PatientController : Controller
@@ -39,7 +41,7 @@ namespace FHIR_MIS_web.Controllers
                     }
                 },
                 Gender = viewModel.FhirGender,
-                BirthDate = viewModel.BirthDate.Date.ToShortDateString(),
+                BirthDate = viewModel.BirthDate.ToString("yyyy-MM-dd"),
                 Telecom = new List<ContactPoint> { new ContactPoint()
                 {
                     System = ContactPoint.ContactPointSystem.Phone,
