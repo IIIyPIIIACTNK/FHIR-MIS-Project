@@ -50,5 +50,22 @@ namespace FHIR_MIS_web.Controllers
             });
             return RedirectToAction("Index");
         }
+
+        public async Task<IActionResult> Detail()
+        {
+            return View(new DetailPatientViewModel()
+            {
+                Name = "TestName",
+                Surname = "TestSurname",
+                Patronymic = "TestPatronymic",
+                Gender = AdministrativeGender.Unknown,
+                Adress = new Address()
+                {
+                    City = "TestCity",
+                    Line = new string[] { "TestLine 123" },
+                },
+                Birthdate = new DateOnly(2000,01,01) 
+            }) ;
+        }
     }
 }
