@@ -8,8 +8,8 @@ namespace FHIR_MIS_web.ViewModels
         public string Name { get; set; }
         public string Surname { get; set; }
         public string Patronymic { get; set; }
-        public AdministrativeGender Gender { get; set; }
-        public DateOnly Birthdate { get; set; }
+        public AdministrativeGender? Gender { get; set; }
+        public string Birthdate { get; set; }
         public Address Adress { get; set; }
     }
 }
