@@ -13,7 +13,6 @@ namespace FHIR_MIS_web.Repositories
         public ServerPatientRepository(IOptions<FhirServerSettings> server)
         {
             _client = new FhirClient(server.Value.Url);
-            Console.WriteLine(server.Value.Url);
         }
         public bool Create(Patient patient)
         {
@@ -28,17 +27,31 @@ namespace FHIR_MIS_web.Repositories
 
         public bool Delete(Patient patient)
         {
-            throw new NotImplementedException();
+            if (patient == null)
+            {
+                Log.Error("Patient in create func was null");
+                return false;
+            }
+            _client.DeleteAsync(patient);
+            return true;
         }
 
-        public Patient GetById(int id)
+        public Patient GetById(string id)
         {
-            throw new NotImplementedException();
+            Bundle bundle = _client.SearchByIdAsync<Patient>(id).Result;
+            Patient patient = (Patient)bundle.Entry.FirstOrDefault().Resource;
+            return patient;
         }
 
         public bool Update(Patient patient)
         {
-            throw new NotImplementedException();
+            if (patient == null)
+            {
+                Log.Error("Patient in create func was null");
+                return false;
+            }
+            _client.UpdateAsync(patient);
+            return true;
         }
     }
 }

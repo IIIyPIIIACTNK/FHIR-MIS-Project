@@ -50,5 +50,34 @@ namespace FHIR_MIS_web.Controllers
             });
             return RedirectToAction("Index");
         }
+
+        public async Task<IActionResult> Detail()
+        {
+            string id = "6";
+            Patient patient = _serverPatientRepository.GetById(id);
+            var vm = new DetailPatientViewModel()
+            {
+                Name = patient.Name.FirstOrDefault().GivenElement.First().Value,
+                Surname = patient.Name.FirstOrDefault().Family,
+                Patronymic = patient.Name.FirstOrDefault().GivenElement.Last().Value,
+                Adress = patient.Address.FirstOrDefault(),
+                Birthdate= patient.BirthDate.ToString(),
+                Gender = patient.Gender
+            };
+            return View(vm);
+            //return View(new DetailPatientViewModel()
+            //{
+            //    Name = "TestName",
+            //    Surname = "TestSurname",
+            //    Patronymic = "TestPatronymic",
+            //    Gender = AdministrativeGender.Unknown,
+            //    Adress = new Address()
+            //    {
+            //        City = "TestCity",
+            //        Line = new string[] { "TestLine 123" },
+            //    },
+            //    Birthdate = new DateOnly(2000,01,01) 
+            //}) ;
+        }
     }
 }

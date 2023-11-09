@@ -1,0 +1,78 @@
+﻿@using FHIR_MIS_web.ViewModels;
+@model DetailPatientViewModel;
+
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <div class="mb-2 p-1">
+                    <label class="text-dark text-opacity-75 mb-1">Фамилия</label>
+                    <p class="text-black">@Model.Surname</p>
+                </div>
+                <div class="mb-2 p-1">
+                    <label class="text-dark text-opacity-75 mb-1">Имя</label>
+                    <p class="text-black">@Model.Name</p>
+                </div>
+                <div class="p-1">
+                    <label class="text-dark text-opacity-75">Отчество</label>
+                    <p class="text-black">@Model.Patronymic</p>
+            </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card mb-2">
+                @if(@Model.Adress != null)
+                {
+                    <div class="p-1">
+                    <label class="text-dark text-opacity-75 mb-1">Город</label>
+                    <p class="text-black">@Model.Adress.City</p>
+                    </div>
+                    <div class="p-1">
+                    <label class="text-dark text-opacity-75 mb-1">Улица</label>
+                    <p class="text-black">@Model.Adress.Line.FirstOrDefault()</p>
+                    </div>
+                }
+                else
+                {
+                    <div class="p-1">
+                        <label class="text-dark text-opacity-75 mb-1">Город</label>
+                        <p class="text-black"></p>
+                    </div>
+                    <div class="p-1">
+                        <label class="text-dark text-opacity-75 mb-1">Улица</label>
+                        <p class="text-black"></p>
+                    </div>
+                }
+
+            </div>
+            <div class="card">
+                @if (Model.Gender.HasValue)
+                {
+                    <div>
+                    <label class="text-dark text-opacity-75 mb-1">Пол</label>
+                    <p class="text-black">@Model.Gender.ToString()</p>
+                </div>
+                <div>
+                    <label class="text-dark text-opacity-75 mb-1">Дата Рождения</label>
+                    <p class="text-black">@Model.Birthdate</p>
+                    </div>
+                }
+                else
+                {
+                    <div>
+                    <label class="text-dark text-opacity-75 mb-1">Пол</label>
+                    <p class="text-black"></p>
+                </div>
+                <div>
+                    <label class="text-dark text-opacity-75 mb-1">Дата Рождения</label>
+                    <p class="text-black"></p>
+                    </div>
+                }
+            </div>    
+        </div>
+    </div>
+    <div class="btn btn-outline-primary">
+        <a></a>
+    </div>
+</div>
