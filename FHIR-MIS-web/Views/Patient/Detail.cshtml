@@ -22,24 +22,53 @@
         </div>
         <div class="col">
             <div class="card mb-2">
-                <div class="p-1">
+                @if(@Model.Adress != null)
+                {
+                    <div class="p-1">
                     <label class="text-dark text-opacity-75 mb-1">Город</label>
                     <p class="text-black">@Model.Adress.City</p>
-                </div>
-                <div class="p-1">
+                    </div>
+                    <div class="p-1">
                     <label class="text-dark text-opacity-75 mb-1">Улица</label>
                     <p class="text-black">@Model.Adress.Line.FirstOrDefault()</p>
-                </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="p-1">
+                        <label class="text-dark text-opacity-75 mb-1">Город</label>
+                        <p class="text-black"></p>
+                    </div>
+                    <div class="p-1">
+                        <label class="text-dark text-opacity-75 mb-1">Улица</label>
+                        <p class="text-black"></p>
+                    </div>
+                }
+
             </div>
             <div class="card">
-                <div>
+                @if (Model.Gender.HasValue)
+                {
+                    <div>
                     <label class="text-dark text-opacity-75 mb-1">Пол</label>
                     <p class="text-black">@Model.Gender.ToString()</p>
                 </div>
                 <div>
                     <label class="text-dark text-opacity-75 mb-1">Дата Рождения</label>
                     <p class="text-black">@Model.Birthdate</p>
+                    </div>
+                }
+                else
+                {
+                    <div>
+                    <label class="text-dark text-opacity-75 mb-1">Пол</label>
+                    <p class="text-black"></p>
                 </div>
+                <div>
+                    <label class="text-dark text-opacity-75 mb-1">Дата Рождения</label>
+                    <p class="text-black"></p>
+                    </div>
+                }
             </div>    
         </div>
     </div>

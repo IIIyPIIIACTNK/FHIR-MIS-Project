@@ -51,19 +51,20 @@ namespace FHIR_MIS_web.Controllers
             return RedirectToAction("Index");
         }
 
-        public async Task<IActionResult> Detail(string patientId)
+        public async Task<IActionResult> Detail()
         {
-            Patient patient = _serverPatientRepository.GetById(patientId);
+            string id = "6";
+            Patient patient = _serverPatientRepository.GetById(id);
             var vm = new DetailPatientViewModel()
             {
-                Name = patient.Name.First().GivenElement.First().Value,
-                Surname = patient.Name.First().Family,
-                Patronymic = patient.Name.First().GivenElement.Last().Value,
-                Adress = patient.Address.First(),
+                Name = patient.Name.FirstOrDefault().GivenElement.First().Value,
+                Surname = patient.Name.FirstOrDefault().Family,
+                Patronymic = patient.Name.FirstOrDefault().GivenElement.Last().Value,
+                Adress = patient.Address.FirstOrDefault(),
                 Birthdate= patient.BirthDate.ToString(),
-                Gender = patient.Gender,
+                Gender = patient.Gender
             };
-            return View();
+            return View(vm);
             //return View(new DetailPatientViewModel()
             //{
             //    Name = "TestName",

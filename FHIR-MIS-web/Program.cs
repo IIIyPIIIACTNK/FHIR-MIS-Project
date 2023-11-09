@@ -43,7 +43,7 @@ namespace FHIR_MIS_web
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Patient}/{action=Detail}/{id?}");
+                pattern: "{controller=Patient}/{action=Index}/{id?}");
 
             app.Run();
         }
