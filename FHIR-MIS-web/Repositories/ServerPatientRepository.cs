@@ -10,9 +10,13 @@ namespace FHIR_MIS_web.Repositories
     public class ServerPatientRepository : IServerPatientRepository
     {
         FhirClient _client;
+        FhirClientSettings settings = new FhirClientSettings()
+        {
+            PreferredFormat = ResourceFormat.Json
+        };
         public ServerPatientRepository(IOptions<FhirServerSettings> server)
         {
-            _client = new FhirClient(server.Value.Url);
+            _client = new FhirClient(server.Value.Url, settings);
         }
         public bool Create(Patient patient)
         {
@@ -25,15 +29,24 @@ namespace FHIR_MIS_web.Repositories
             return true;
         }
 
-        public bool Delete(Patient patient)
+        public bool Delete(string id)
         {
-            if (patient == null)
+            if (id == null)
             {
-                Log.Error("Patient in create func was null");
+                Log.Error("Input id in delete func was null");
                 return false;
             }
-            _client.DeleteAsync(patient);
-            return true;
+            try
+            {
+                Patient pat = (Patient)_client.SearchByIdAsync<Patient>(id).Result.Entry.FirstOrDefault().Resource;
+                _client.DeleteAsync(pat);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Log.Error($"Failed to delete patient. Error: {ex.Message}");
+                return false;
+            }
         }
 
         public Patient GetById(string id)

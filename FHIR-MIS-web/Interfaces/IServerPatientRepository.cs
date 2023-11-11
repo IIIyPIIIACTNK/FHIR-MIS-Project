@@ -7,6 +7,6 @@ namespace FHIR_MIS_web.Interfaces
         public bool Create(Patient patient);
         public bool Update(Patient patient);
         public Patient GetById(string id);
-        public bool Delete(Patient patient);
+        public bool Delete(string id);
     }
 }

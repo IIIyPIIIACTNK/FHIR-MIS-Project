@@ -5,6 +5,7 @@ namespace FHIR_MIS_web.ViewModels
 {
     public class DetailPatientViewModel
     {
+        public string PatientId { get; set; }
         public string Name { get; set; }
         public string? Surname { get; set; }
         public string Patronymic { get; set; }
