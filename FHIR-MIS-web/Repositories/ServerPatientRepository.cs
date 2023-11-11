@@ -60,11 +60,19 @@ namespace FHIR_MIS_web.Repositories
         {
             if (patient == null)
             {
-                Log.Error("Patient in create func was null");
+                Log.Error("Patient in update func was null");
                 return false;
             }
-            _client.UpdateAsync(patient);
-            return true;
+            try
+            {
+                _client.UpdateAsync(patient);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Log.Error($"Error  in update patient func: {ex.Message} {ex.InnerException}");
+                return false;
+            }
         }
     }
 }

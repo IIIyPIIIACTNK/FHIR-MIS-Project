@@ -22,6 +22,7 @@ namespace FHIR_MIS_web.Controllers
         
         public async Task<IActionResult> Index()
         {
+            PatientPull.Pull.Clear();
             IEnumerable<FireLyPatientViewModel> toView = ViewModelMapper.
                 PatientToFireLyVM(
                 await PatientWrapper.GetPatients(fhirClient)
