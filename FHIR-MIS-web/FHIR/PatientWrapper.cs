@@ -79,8 +79,7 @@ namespace FHIR_MIS_web.FHIR
                     if (patients.Count >= maxPatients) break;
                 }
                 if (patients.Count >= maxPatients) break;
-
-                fhirClient.Continue(patientBundle);
+                patientBundle = await fhirClient.ContinueAsync(patientBundle);
             }
             fhirClient.Dispose();
             return patients;
