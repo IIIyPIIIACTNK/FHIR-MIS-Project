@@ -95,8 +95,34 @@ namespace FHIR_MIS_web.Controllers
             };
             return View(vm);
         }
-      
-    
-        
+        [HttpPost]
+        public async Task<IActionResult> Update(UpdatePatientViewModel viewModel)
+        {
+            Patient pat = PatientPull.Pull[viewModel.PatientId];
+            HumanName name = new HumanName
+            {
+                Family = viewModel.Surname,
+                Given = new string[]
+                {
+                    viewModel.Name,
+                    viewModel.Surname
+                }
+            };
+            ContactPoint telephone = new ContactPoint()
+            {
+                Value = viewModel.Telephone,
+                System = ContactPoint.ContactPointSystem.Phone
+
+            };
+            pat.Name.Clear();
+            pat.Name.Add(name);
+            pat.BirthDate = viewModel.BirthDate;
+            pat.Gender = viewModel.Gender;
+            pat.Telecom.Clear();
+            pat.Telecom.Add(telephone);
+
+            PatientPull.Pull.Clear();
+            return _serverPatientRepository.Update(pat) ? RedirectToAction("Detail", new { id = viewModel.PatientId }) : RedirectToAction("Index","FireLy");
+        }
     }
 }
