@@ -7,7 +7,7 @@ namespace FHIR_MIS_web.FHIR
 {
     public static class PatientWrapper
     {
-        public static List<Patient> GetPatients(
+        public static async Task<List<Patient>> GetPatients(
             FhirClient fhirClient,
             SearchParams criteria = null,
             int maxPatients = 20)
@@ -17,7 +17,7 @@ namespace FHIR_MIS_web.FHIR
 
             if (criteria == null)
             {
-                patientBundle = fhirClient.Search<Patient>();
+                patientBundle = await fhirClient.SearchAsync<Patient>();
             }
             else
             {
