@@ -62,7 +62,7 @@ namespace FHIR_MIS_web.Controllers
                 PatientId = id,
                 Name = hasGivenName ? patient.Name.FirstOrDefault().GivenElement.FirstOrDefault().Value : "",
                 Surname = patient.Name.FirstOrDefault().Family,
-                Patronymic = hasGivenName ? patient.Name.FirstOrDefault().GivenElement.FirstOrDefault().Value : "",
+                Patronymic = hasGivenName ? patient.Name.FirstOrDefault().GivenElement.LastOrDefault().Value : "",
                 Adress = patient.Address.FirstOrDefault(),
                 Birthdate = patient.BirthDate,
                 Gender = patient.Gender.HasValue ? patient.Gender : AdministrativeGender.Unknown,
@@ -105,7 +105,7 @@ namespace FHIR_MIS_web.Controllers
                 Given = new string[]
                 {
                     viewModel.Name,
-                    viewModel.Surname
+                    viewModel.Patronymic
                 }
             };
             ContactPoint telephone = new ContactPoint()
@@ -114,12 +114,22 @@ namespace FHIR_MIS_web.Controllers
                 System = ContactPoint.ContactPointSystem.Phone
 
             };
+            Address address = new Address()
+            {
+                City = viewModel.City,
+                Line = new string[]
+                {
+                    viewModel.Street
+                }
+            };
             pat.Name.Clear();
             pat.Name.Add(name);
             pat.BirthDate = viewModel.BirthDate;
             pat.Gender = viewModel.Gender;
             pat.Telecom.Clear();
             pat.Telecom.Add(telephone);
+            pat.Address.Clear();
+            pat.Address.Add(address);
 
             PatientPull.Pull.Clear();
             return _serverPatientRepository.Update(pat) ? RedirectToAction("Detail", new { id = viewModel.PatientId }) : RedirectToAction("Index","FireLy");
