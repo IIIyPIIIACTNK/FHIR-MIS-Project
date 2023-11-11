@@ -57,6 +57,7 @@ namespace FHIR_MIS_web.Controllers
             bool hasGivenName = patient.Name.FirstOrDefault().Given.Count() > 0;
             var vm = new DetailPatientViewModel()
             {
+                PatientId= id,
                 Name = hasGivenName ? patient.Name.FirstOrDefault().GivenElement.FirstOrDefault().Value : "",
                 Surname = patient.Name.FirstOrDefault().Family,
                 Patronymic = hasGivenName ? patient.Name.FirstOrDefault().GivenElement.FirstOrDefault().Value : "",
@@ -68,9 +69,9 @@ namespace FHIR_MIS_web.Controllers
             
         }
 
-        public async Task<IActionResult> Delete()
+        public async Task<IActionResult> Delete(string id)
         {
-            return View();
+            return _serverPatientRepository.Delete(id) ? RedirectToAction("Create") : RedirectToAction("Index");
         }
     }
 }
