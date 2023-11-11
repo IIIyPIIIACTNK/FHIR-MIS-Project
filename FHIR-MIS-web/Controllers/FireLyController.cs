@@ -8,32 +8,32 @@ using Serilog;
 using FHIR_MIS_web.Data;
 using FHIR_MIS_web.FHIR;
 using System.IO;
+using Microsoft.Extensions.Options;
 
 namespace FHIR_MIS_web.Controllers
 {
     public class FireLyController : Controller
     {
-
-        public FireLyController()
+        FhirClient fhirClient;
+        public FireLyController(IOptions<FhirServerSettings> server)
         {
-
+            fhirClient = new FhirClient(server.Value.Url);
         }
-
-        FhirClient fhirClient = new FhirClient(FHIRServers.Servers["FireLy"]);
-        public IActionResult Index()
+        
+        public async Task<IActionResult> Index()
         {
             IEnumerable<FireLyPatientViewModel> toView = ViewModelMapper.
                 PatientToFireLyVM(
-                PatientWrapper.GetPatients(fhirClient)
+                await PatientWrapper.GetPatients(fhirClient)
                 );
             return View(toView);
         }
 
-        public IActionResult SearchResult(SearchViewModel searchViewModel)
+        public async Task<IActionResult> SearchResult(SearchViewModel searchViewModel)
         {
             IEnumerable<FireLyPatientViewModel> toView = ViewModelMapper
                 .PatientToFireLyVM(
-                PatientWrapper.GetPatients(fhirClient)
+                await PatientWrapper.GetPatients(fhirClient)
                 );
             return View(toView);
         }

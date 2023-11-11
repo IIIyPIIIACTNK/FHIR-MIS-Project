@@ -1,0 +1,52 @@
+﻿@using FHIR_MIS_web.ViewModels;
+@model CreatePatientViewModel;
+
+<div class="container">
+    <form method="post" asp-action="Create" enctype="multipart/form-data">
+        <div class="row">
+            <div class="col">
+                <div class="mb-3">
+                    <label asp-for=Surname class="form-label">Фамилия</label>
+                    <input asp-for=Surname class="form-control" />
+                </div>
+                <div class="mb-3">
+                    <label asp-for=Name class="form-label">Имя</label>
+                    <input asp-for=Name class="form-control" />
+                </div>
+                <div class="mb-3">
+                    <label asp-for=Patronymic class="form-label">Отчество</label>
+                    <input asp-for=Patronymic class="form-control" />
+                </div>
+            </div>
+            <div class="col">
+                <div class="row mb-3">
+                    <div class="col">
+                        <label asp-for=Gender class="form-label">Пол</label>
+                        <select asp-for=Gender class="form-select"></select>
+                    </div>
+                    <div class="col">
+                        <label asp-for=BirthDate class="form-label">Дата рождения</label>
+                        <input asp-for=BirthDate type="date" class="form-control"/>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label asp-for=City class="form-label">Город</label>
+                    <input asp-for=City class="form-control"/>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Street" class="form-label">Улица</label>
+                    <input asp-for=Street class="form-control"/>
+                </div>
+            </div>
+            
+        </div>
+        <div class="col mb-3">
+            <div class="mb-3">
+                <label asp-for=Telephone class="form-label">Телефон</label>
+                <input asp-for="Telephone" type="tel" class="form-control" />
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Создать</button>
+    </form>
+</div>
+
